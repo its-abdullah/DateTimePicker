@@ -1,0 +1,256 @@
+/* Redmond styling for jQuery Calendars Picker v2.0.0. */
+.calendars {
+	background-color: #fff;
+	color: #222;
+	border: 1px solid #0E8A8A;
+	padding: 1px;
+    -moz-border-radius: 0.25em;
+    -webkit-border-radius: 0.25em;
+    border-radius: 0.25em;
+	font-family: Arial,Helvetica,Sans-serif;
+	font-size: 90%;
+	display: table;
+}
+.calendars > div {
+	display: table-row;
+}
+.calendars-rtl {
+	direction: rtl;
+}
+/*Khalid change.. Conflict with JS Confirm in Dev for z-index*/
+.calendars-popup {
+	z-index: 999999999;
+}
+.calendars-disable {
+	position: absolute;
+	z-index: 100;
+	background-color: white;
+	opacity: 0.5;
+	filter: alpha(opacity=50);
+}
+.calendars a {
+	color: #222;
+	text-decoration: none;
+}
+
+.calendars a.calendars-disabled {
+	color: #888;
+	cursor: auto;
+}
+/*.calendars button {
+    margin: 0.25em;
+    padding: 0.125em 0em;
+	background-color: #0E8A8A;
+	color: #fff;
+    border: none;
+    -moz-border-radius: 0.25em;
+    -webkit-border-radius: 0.25em;
+    border-radius: 0.25em;
+    font-weight: bold;
+}*/
+.calendars-nav, .calendars-ctrl {
+	float: left;
+	width: 100%;
+	background-color: #fff;
+	font-size: 90%;
+	font-weight: bold;
+}
+.calendars-ctrl {
+	background-color: #fff;
+}
+.calendars-nav .calendars-cmd:hover,
+.calendars-ctrl .calendars-cmd:hover {
+	background-color: #87cece;
+}
+.calendars-cmd {
+	width: 30%;
+}
+.calendars-cmd:hover {
+	background-color: #fff;
+}
+button.calendars-cmd:hover {
+	background-color: #0E8A8A;
+}
+.calendars-cmd-prevJump, .calendars-cmd-nextJump {
+	width: 8%;
+}
+a.calendars-cmd {
+	height: 1.5em;
+}
+button.calendars-cmd {
+	text-align: center;
+}
+.calendars-cmd-prev, .calendars-cmd-prevJump, .calendars-cmd-clear {
+	float: left;
+	padding-left: 2%;
+}
+.calendars-cmd-current, .calendars-cmd-today {
+	float: left;
+	width: 35%;
+	text-align: center;
+}
+.calendars-cmd-next, .calendars-cmd-nextJump, .calendars-cmd-close {
+	float: right;
+	padding-right: 2%;
+	text-align: right;
+}
+.calendars-rtl .calendars-cmd-prev, .calendars-rtl .calendars-cmd-prevJump,
+.calendars-rtl .calendars-cmd-clear {
+	float: right;
+	padding-left: 0%;
+	padding-right: 2%;
+	text-align: right;
+}
+.calendars-rtl .calendars-cmd-current, .calendars-rtl .calendars-cmd-today {
+	float: right;
+}
+.calendars-rtl .calendars-cmd-next, .calendars-rtl .calendars-cmd-nextJump,
+.calendars-rtl .calendars-cmd-close {
+	float: left;
+	padding-left: 2%;
+	padding-right: 0%;
+	text-align: left;
+}
+.calendars-month-nav {
+	float: left;
+	text-align: center;
+}
+.calendars-month-nav div {
+	float: left;
+	width: 12.5%;
+	margin: 1%;
+	padding: 1%;
+}
+.calendars-month-nav span {
+	color: #888;
+}
+.calendars-month-row {
+	clear: left;
+}
+.calendars-month {
+	float: left;
+	width: 15em;
+	border: none;
+	text-align: center;
+}
+.calendars-month th, .calendars-month th a {
+	background-color: #0E8A8A;
+}
+.calendars-month-header, .calendars-month-header select, .calendars-month-header input {
+	height: 1.5em;
+	background-color: #0E8A8A;
+	color: #fff;
+	font-weight: bold;
+}
+.calendars-month-header select, .calendars-month-header input {
+	height: 1.4em;
+	border: none;
+}
+.calendars-month-header input {
+	position: absolute;
+	display: none;
+}
+.calendars-month-header > select {
+	display: inline-block !important;
+}
+.calendars-month table {
+	width: 100%;
+	border-collapse: collapse;
+}
+.calendars-month thead {
+	border-bottom: none;
+}
+.calendars-month th, .calendars-month td {
+	margin: 0em;
+	padding: 0em;
+	font-weight: normal;
+	text-align: center;
+}
+.calendars-month th {
+	border: 1px solid #fff;
+	border-bottom: 1px solid #ddd;
+}
+
+.calendars-month table td, table th {
+  border: 1px solid #ddd;
+}
+.calendars-month table tr:first-child th,
+.calendars-month table tr:first-child td {
+  border-top: 0;
+}
+.calendars-month table tr td:first-child,
+.calendars-month table tr th:first-child {
+  border-left: 0;
+}
+.calendars-month table tr td:last-child,
+.calendars-month table tr th:last-child {
+  border-right: 0;
+}
+
+.calendars-month td.calendars-week * {
+	background-color: #d0e5f5;
+	color: #222;
+	border: none;
+}
+.calendars-month a {
+	display: block;
+	width: 100%;
+	padding: 0.125em 0em;
+	background-color: #fff;
+	color: #000;
+	text-decoration: none;
+}
+.calendars-month span {
+	display: block;
+	width: 100%;
+	padding: 0.125em 0em;
+}
+.calendars-month td span {
+	color: #888;
+}
+.calendars-month td .calendars-other-month {
+	background-color: #fff;
+}
+.calendars-month td .calendars-today {
+	background-color: #8ad8d8;
+}
+/* TODO */
+/* .calendars-month td .calendars-today:before { */
+	/* content: ''; */
+    /* display: inline-block; */
+    /* border: solid transparent; */
+    /* border-width: 0 0 7px 7px; */
+    /* border-bottom-color: #0e8a8a; */
+    /* border-top-color: rgba(0, 0, 0, 0.2); */
+    /* position: absolute; */
+    /* bottom: 46px; */
+    /* left: 22px; */
+/* } */
+.calendars-month td .calendars-highlight {
+	background-color: #87cece;
+}
+.calendars-month td .calendars-selected {
+	background-color: #0E8A8A;
+	color: #fff;
+}
+.calendars-status {
+	clear: both;
+	text-align: center;
+}
+.calendars-clear-fix {
+	clear: both;
+}
+
+.calendars-month th {
+	border: 0px;
+}
+select.calendars-month-year {
+	outline: none;
+}
+select.calendars-month-year:focus {
+	background-color: #0a7777;
+}
+.calendars-month-year option {
+	background-color: #fff;
+	color: #000;
+}

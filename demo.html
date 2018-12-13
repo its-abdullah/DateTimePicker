@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+	<title>jQuery Calendars</title>
+	<!--#region css-->
+	<link rel="stylesheet" href="en.min.css">
+    <link rel="stylesheet" href="style.en.css">
+    <link rel="stylesheet" href="m.css">
+    <link rel="stylesheet" href="m.en.css">
+	<link href="jquery.calendars.picker.css" media="all" rel="stylesheet" />
+	<link href="ui.calendars.picker.css" media="all" rel="stylesheet" />
+	<!-- <link href="redmond.calendars.picker.css" media="all" rel="stylesheet" /> -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link href="govDotSa.calendars.picker.css" media="all" rel="stylesheet" />
+	<link href="timePicker.css" media="all" rel="stylesheet" />
+	<!--#endregion css-->
+	<!--#region js-->
+	<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+	 crossorigin="anonymous"></script>
+	<script src="jquery.plugin.js"></script>
+	<script src="jquery.calendars.js"></script>
+	<script src="jquery.calendars-ar.js"></script>
+	<script src="jquery.calendars.plus.js"></script>
+	<script src="jquery.calendars.ummalqura.js"></script>
+	<script src="jquery.calendars.ummalqura-ar.js"></script>
+	<script src="jquery.calendars.picker.js"></script>
+	<script src="convertDate.js"></script>
+	<script src="timePicker.js"></script>
+	<!-- <script src="jquery.calendars.picker-ar.js"></script> -->
+	<!--#endregion js-->
+	<script>
+		$(document).ready(function () {
+			$('#inputG').calendarsPicker({
+				dateFormat: 'dd/mm/yyyy',
+				showAnim: '',
+				firstDay: 0,
+				onClose: function () {
+					console.log('onClose');
+				},
+				onShow: function () {
+					console.log('onshow');
+					AppendTimePicker(this);
+				},
+				onSelect: function (date) {
+					console.log('onSelect');
+					selectedDate = date[0]._calendar.formatDate('dd/mm/yyyy', date[0]);
+					$(this).val(generateTime(selectedDate));
+				}
+			});
+
+			$('#inputG2').calendarsPicker({
+				dateFormat: 'dd/mm/yyyy',
+				showAnim: '',
+				firstDay: 0,
+				onClose: function () {
+					console.log('onClose');
+				},
+				onShow: function () {
+					console.log('onshow');
+					AppendTimePicker(this);
+				},
+				onSelect: function (date) {
+					console.log('onSelect');
+					selectedDate = date[0]._calendar.formatDate('dd/mm/yyyy', date[0]);
+					$(this).val(generateTime(selectedDate));
+				}
+			});
+		});
+	</script>
+</head>
+
+<body>
+	<h1>jQuery Calendars</h1>
+	<p>Enter a gregorian date:
+		<input type="text" id="inputG">
+	</p>
+	<h4>this is just a test</h4>
+	<h4>this is just a test</h4>
+	<h4>this is just a test</h4>
+	<h4>this is just a test</h4>
+	<h1>jQuery Calendars</h1>
+	<p>Enter a gregorian date:
+		<input type="text" id="inputG2">
+	</p>
+</body>
+
+</html>
