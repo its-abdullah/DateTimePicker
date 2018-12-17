@@ -5,7 +5,8 @@
    Please attribute the author if you use it. */
 /* This file is modified and has not been shared over the internet yet
    The changes were made by Abdullah Alhussain
-   added timePicker option, don't forget to include TimePicker.js */
+   added timePicker option, don't forget to include TimePicker.js
+   added toggle function */
 
 (function($) { // Hide scope, no $ conflict
 	'use strict';
@@ -400,6 +401,8 @@ $(selector).calendarsPicker({minDate: 0, maxDate: '+1m +1w'}) */
 			@property {boolean} [showOnFocus=true] <code>true</code> for popup on focus, <code>false</code> for not.
 			@property {string|Element|jQuery} [showTrigger=null] Element to be cloned for a trigger,
 				<code>null</code> for none.
+			@property {string} [buttonTrigger=null] Element to trigger calendar picker,
+				<code>null</code> for none.
 			@property {string} [showAnim='show'] Name of jQuery animation for popup, '' for no animation.
 			@property {object} [showOptions=null] Options for enhanced animations.
 			@property {string|number} [showSpeed='normal'] Duration of display/closure, named or in milliseconds.
@@ -425,7 +428,7 @@ $(selector).calendarsPicker({minDate: 0, maxDate: '+1m +1w'}) */
 				<code>false</code> to never use it.
 			@property {boolean} [changeMonth=true] <code>true</code> to change month/year via drop-down,
 				<code>false</code> for navigation only.
-			@property {string} [yearRange='c-10:c+10'] Range of years to show in drop-down: 'any' for direct text entry
+			@property {string} [yearRange='c-70:c+10'] Range of years to show in drop-down: 'any' for direct text entry
 				or 'start:end', where start/end are '+-nn' for relative to today
 				or 'c+-nn' for relative to the currently selected date
 				or 'nnnn' for an absolute year.
@@ -466,6 +469,7 @@ $(selector).calendarsPicker({minDate: $.calendars.newDate(2001, 1, 1),
 			pickerClass: '',
 			showOnFocus: true,
 			showTrigger: null,
+			buttonTrigger: null,
 			showAnim: 'show',
 			showOptions: {},
 			showSpeed: 'normal',
@@ -615,6 +619,13 @@ $(selector).calendarsPicker({minDate: $.calendars.newDate(2001, 1, 1),
 		},
 
 		_postAttach: function(elem, inst) {
+			//buttonTrigger
+			if (inst.options.buttonTrigger != null)
+				$(inst.options.buttonTrigger).click(function(){
+					if (!plugin.isDisabled(elem[0])) {
+						plugin[plugin.curInst === inst ? 'hide' : 'show'](elem[0]);
+					}
+				});
 			if (inst.inline) {
 				inst.drawDate = plugin._checkMinMax((inst.selectedDates[0] ||
 					inst.get('defaultDate') || inst.options.calendar.today()).newDate(), inst);
@@ -869,6 +880,27 @@ $(selector).calendarsPicker({minDate: $.calendars.newDate(2001, 1, 1),
 				}
 			}
 		},
+
+		/** Toggle a popup datepicker.
+			@memberof CalendarsPicker
+			@param {Event|Element} elem a focus event or the control to use.
+			@example $(selector).datepick('toggle') */
+			toggle: function(elem) {
+				if (!elem) {
+					return;
+				}
+				var inst = this._getInst(elem);
+				if (inst.div == null)
+				{
+					plugin.show(elem);
+					return;
+				}
+				else
+				{
+					plugin.hide(elem);
+					return;
+				}
+			},
 
 		/** Extract possible dates from a string.
 			@memberof CalendarsPicker
