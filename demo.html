@@ -40,6 +40,13 @@
 	<!--#endregion js-->
 	<script>
 		$(document).ready(function () {
+			$('#input1').calendarsPicker({
+				dateFormat: 'dd/mm/yyyy',
+				showAnim: '',
+				firstDay: 0,
+				buttonTrigger: '#input1Trigger'
+			});
+
 			$('#inputG').calendarsPicker({
 				dateFormat: 'dd/mm/yyyy',
 				showAnim: '',
@@ -80,9 +87,16 @@
 		
 	</script>
 </head>
-
 <body>
 	<h1>jQuery Calendars</h1>
+	<div class="col-lg-4 mg-t-20 mg-lg-t-0">
+		<div class="input-group">
+		  <input id="input1" type="text" class="form-control">
+		  <span class="input-group-btn">
+			<button class="btn bd bg-white tx-gray-600" id="input1Trigger" type="button"><i class="fa fa-calendar"></i></button>
+		  </span>
+		</div><!-- input-group -->
+	  </div>
 	<p>Enter a gregorian date:
 		<div class="input-group col-md-4">
 			<input id="inputG" type="text" class="form-control" placeholder="Search for...">
