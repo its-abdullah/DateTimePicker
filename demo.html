@@ -61,8 +61,7 @@
 				showTrigger: '<button class="btn bd bg-white tx-gray-600" id="InputGBtn" type="button"><i class="fa fa-calendar"></i></button>'
 			});
 
-			
-			//time
+			//timePicker
 			
 			$('#inputG2').popover({
 				content: timePickerHTML ,
@@ -70,21 +69,25 @@
 				placement: 'bottom',
 				toggle: 'popover',
 				trigger: 'manual'
-				// trigger: 'focus'
 			});
 
-			$('#trigger').click(function () {
-				$('#inputG2').popover('toggle');
+			$('html').on('click', function (e) {
+				$('[data-toggle=popover]').each(function () {
+					if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+						// 	 $(this).popover('hide');
+						$('#inputG2').popover('hide')
+					}
+				});
 			});
 
-			// $('Html').on('click', function (e) {
-			// 	if (typeof $(e.target).data('original-title') == 'undefined' &&
-			// 		!$(e.target).parents().is('.popover.in')) {
-			// 		$('[data-original-title]').popover('hide');
-			// 	}
-			// });
-		
+			$("[data-toggle=popover]").click(function () {
+				$('#inputG2').popover('toggle');	
+			});
 			
+			// $('#trigger').click(function(){
+			// 	$('#inputG2').popover('toggle');	
+			// });
+
 		});
 		
 	</script>
@@ -114,13 +117,8 @@
 	<h4>this is just a test</h4>
 	<h1>jQuery Calendars</h1>
 	<p>Enter a gregorian date:
-		<input type="text" id="inputG2">
-		<button  class="btn bd bg-white tx-gray-600" id="trigger" type="button"data-trigger= 'focus' ><i class="fa fa-clock-o"></i></button>
+		<input type="text" id="inputG2" >
+		<button  class="btn bd bg-white tx-gray-600" id="trigger" value="timepicker" data-toggle="popover" type="button"><i class="fa fa-clock-o"></i></button>
 	</p>
 </body>
-
-<script>
-
-</script>
-
 </html>
