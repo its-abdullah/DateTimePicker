@@ -17,6 +17,8 @@
 	<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
 	 crossorigin="anonymous"></script>
+	<script src="js/popper.js/popper.js"></script>
+	<script src="js/bootstrap/bootstrap.js"></script>
 	<script src="js/jQuery-Calendars/jquery.plugin.js"></script>
 	<script src="js/jQuery-Calendars/jquery.calendars.js"></script>
 	<script src="js/jQuery-Calendars/jquery.calendars-ar.js"></script>
@@ -26,6 +28,14 @@
 	<script src="js/jQuery-Calendars/jquery.calendars.picker.js"></script>
 	<script src="js/timePicker.js"></script>
 	<script src="js/convertDate.js"></script>
+	<style>
+		.bs-popover-bottom .arrow ,.bs-popover-top .arrow  {
+			display: none;
+		}
+		.bs-popover-auto[x-placement^=bottom], .bs-popover-bottom {
+             margin-top:0px; }
+	</style>
+	
 	<!-- <script src="jquery.calendars.picker-ar.js"></script> -->
 	<!--#endregion js-->
 	<style>
@@ -47,6 +57,59 @@
 	}
 	</style>
 	<style>
+	<script>
+		$(document).ready(function () {
+			$('#input1').calendarsPicker({
+				dateFormat: 'dd/mm/yyyy',
+				showAnim: '',
+				firstDay: 0,
+				buttonTrigger: '#input1Trigger'
+			});
+
+			$('#inputG').calendarsPicker({
+				dateFormat: 'dd/mm/yyyy',
+				showAnim: '',
+				firstDay: 0,
+				showTrigger: '#InputGBtn'
+			});
+
+			$('#inputG2').calendarsPicker({
+				dateFormat: 'dd/mm/yyyy',
+				showAnim: '',
+				firstDay: 0,
+				showTrigger: '<button class="btn bd bg-white tx-gray-600" id="InputGBtn" type="button"><i class="fa fa-calendar"></i></button>'
+			});
+
+			//timePicker
+			
+			$('#inputG2').popover({
+				content: timePickerHTML ,
+				html: true,
+				placement: 'bottom',
+				toggle: 'popover',
+				trigger: 'manual'
+			});
+
+			$('html').on('click', function (e) {
+				$('[data-toggle=popover]').each(function () {
+					if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+						// 	 $(this).popover('hide');
+						$('#inputG2').popover('hide')
+					}
+				});
+			});
+
+			$("[data-toggle=popover]").click(function () {
+				$('#inputG2').popover('toggle');	
+			});
+			
+			// $('#trigger').click(function(){
+			// 	$('#inputG2').popover('toggle');	
+			// });
+
+		});
+		
+	</script>
 </head>
 <body>
 	<h1>jQuery Calendars</h1>
@@ -63,9 +126,9 @@
 			<input id="inputG" type="text" class="form-control" placeholder="Search for...">
 			<div class="input-group-btn">
 			  <button class="btn bd bg-white tx-gray-600" id="InputGBtn" type="button"><i class="fa fa-calendar"></i></button>
-			  <button class="btn bd bg-white tx-gray-600" type="button"><i class="fa fa-clock-o"></i></button>
 			</div>
 		  </div>
+		
 	</p>
 	<h4>this is just a test</h4>
 	<h4>this is just a test</h4>
@@ -75,6 +138,8 @@
 	<p>Enter a gregorian date:
 		<input type="text" id="inputG2">
 
+		<input type="text" id="inputG2" >
+		<button  class="btn bd bg-white tx-gray-600" id="trigger" value="timepicker" data-toggle="popover" type="button"><i class="fa fa-clock-o"></i></button>
 	</p>
 	<script>
 		$(document).ready(function () {
