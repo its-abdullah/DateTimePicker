@@ -35,14 +35,6 @@ function dateTimePicker(elem) {
 //#region adding buttonTrigger option
 $.calendarsPicker.regionalOptions[""].buttonTrigger = null;
 
-// $.calendarsPicker.getbuttonTrigger = function(elem, options) {
-//     if (options.buttonTrigger)
-//     {
-//         return $(elem).parent().children('.input-group-append').children('.dateBtn');
-//     }
-//     return false;
-// }
-
 $.calendarsPicker._instSettings = function(elem, options) { // jshint unused:false
     //buttonTrigger
     if (options.buttonTrigger) {
