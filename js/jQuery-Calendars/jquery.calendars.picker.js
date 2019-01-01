@@ -1,7 +1,7 @@
 ﻿/* http://keith-wood.name/calendars.html
    Calendars date picker for jQuery v2.1.0.
    Written by Keith Wood (wood.keith{at}optusnet.com.au) August 2009.
-   Available under the MIT (http://keith-wood.name/licence.html) license. 
+   Available under the MIT (http://keith-wood.name/licence.html) license.
    Please attribute the author if you use it. */
 /* This file is modified and has not been shared over the internet yet
    The changes were made by Abdullah Alhussain
@@ -619,13 +619,6 @@ $(selector).calendarsPicker({minDate: $.calendars.newDate(2001, 1, 1),
 		},
 
 		_postAttach: function(elem, inst) {
-			//buttonTrigger
-			if (inst.options.buttonTrigger != null)
-				$(inst.options.buttonTrigger).click(function(){
-					if (!plugin.isDisabled(elem[0])) {
-						plugin[plugin.curInst === inst ? 'hide' : 'show'](elem[0]);
-					}
-				});
 			if (inst.inline) {
 				inst.drawDate = plugin._checkMinMax((inst.selectedDates[0] ||
 					inst.get('defaultDate') || inst.options.calendar.today()).newDate(), inst);
@@ -693,6 +686,14 @@ $(selector).calendarsPicker({minDate: $.calendars.newDate(2001, 1, 1),
 							plugin[plugin.curInst === inst ? 'hide' : 'show'](elem[0]);
 						}
 					}));
+			//buttonTrigger
+			// if (inst.options.buttonTrigger) {
+			// 	$(inst.options.buttonTrigger).click(function(){
+			// 		if (!plugin.isDisabled(elem[0])) {
+			// 			plugin[plugin.curInst === inst ? 'hide' : 'show'](elem[0]);
+			// 		}
+			// 	});
+			// }
 			this._autoSize(elem, inst);
 			var dates = this._extractDates(inst, elem.val());
 			if (dates) {
@@ -893,12 +894,10 @@ $(selector).calendarsPicker({minDate: $.calendars.newDate(2001, 1, 1),
 				if (inst.div == null)
 				{
 					plugin.show(elem);
-					return;
 				}
 				else
 				{
 					plugin.hide(elem);
-					return;
 				}
 			},
 
@@ -1013,7 +1012,7 @@ $(selector).calendarsPicker({minDate: $.calendars.newDate(2001, 1, 1),
 					}
 				}
 				$(inst.options.altField).val(altValue);
-				
+
 				if ($.isFunction(inst.options.onSelect) && !keyUp && !inst.inSelect) {
 					inst.inSelect = true; // Prevent endless loops
 					inst.options.onSelect.apply(elem, [inst.selectedDates]);
@@ -1099,7 +1098,9 @@ $(selector).calendarsPicker({minDate: $.calendars.newDate(2001, 1, 1),
 			}
 			var elem = $(event.target);
 			if (elem.closest('.' + plugin._popupClass + ',.' + plugin._triggerClass).length === 0 &&
-					!elem.hasClass(plugin._getMarker())) {
+				$(event.target)[0] != $(plugin.curInst.options.buttonTrigger)[0] &&
+				$($(event.target).parent())[0] != $(plugin.curInst.options.buttonTrigger)[0] &&
+				!elem.hasClass(plugin._getMarker())) {
 				plugin.hide(plugin.curInst);
 			}
 		},
@@ -1483,7 +1484,7 @@ $(selector).datepick('setDate', [date1, date2, date3]) */
 				var calendar = inst.options.calendar;
 				var show = this._checkMinMax(typeof year !== 'undefined' && year !== null ?
 					calendar.newDate(year, month, 1) : calendar.today(), inst);
-				inst.drawDate.date(show.year(), show.month(), 
+				inst.drawDate.date(show.year(), show.month(),
 					typeof day !== 'undefined' && day !== null ? day : Math.min(inst.drawDate.day(),
 					calendar.daysInMonth(show.year(), show.month())));
 				this._update(elem);

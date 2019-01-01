@@ -28,32 +28,25 @@
 	<script src="js/convertDate.js"></script>
 	<!-- <script src="jquery.calendars.picker-ar.js"></script> -->
 	<!--#endregion js-->
-	<script>
-		$(document).ready(function () {
-			$('#input1').calendarsPicker({
-				dateFormat: 'dd/mm/yyyy',
-				showAnim: '',
-				firstDay: 0,
-				buttonTrigger: '#input1Trigger'
-			});
-
-			$('#inputG').calendarsPicker({
-				dateFormat: 'dd/mm/yyyy',
-				showAnim: '',
-				firstDay: 0,
-				showTrigger: '#InputGBtn'
-			});
-
-			$()
-
-			$('#inputG2').calendarsPicker({
-				dateFormat: 'dd/mm/yyyy',
-				showAnim: '',
-				firstDay: 0,
-				showTrigger: '<button class="btn bd bg-white tx-gray-600" id="InputGBtn" type="button"><i class="fa fa-calendar"></i></button>'
-			});
-		});
-	</script>
+	<style>
+		.input-group .form-control:not(:first-child),
+		.input-group .dataTables_filter input:not(:first-child),
+		.dataTables_filter .input-group input:not(:first-child),
+		.input-group-addon:not(:first-child),
+		.input-group-btn:not(:first-child) > .btn,
+		.sp-container .input-group-btn:not(:first-child) > button,
+		.input-group-btn:not(:first-child) > .btn-group > .btn,
+		.sp-container .input-group-btn:not(:first-child) > .btn-group > button,
+		.input-group-btn:not(:first-child) > .dropdown-toggle,
+		.input-group-btn:not(:last-child) > .btn:not(:first-child),
+		.sp-container .input-group-btn:not(:last-child) > button:not(:first-child),
+		.input-group-btn:not(:last-child) > .btn-group:not(:first-child) > .btn,
+		.sp-container .input-group-btn:not(:last-child) > .btn-group:not(:first-child) > button {
+	    border-top-left-radius: 0;
+	    border-bottom-left-radius: 0;
+	}
+	</style>
+	<style>
 </head>
 <body>
 	<h1>jQuery Calendars</h1>
@@ -81,7 +74,33 @@
 	<h1>jQuery Calendars</h1>
 	<p>Enter a gregorian date:
 		<input type="text" id="inputG2">
-		
+
 	</p>
+	<script>
+		$(document).ready(function () {
+			$('#input1').calendarsPicker({
+				dateFormat: 'dd/mm/yyyy',
+				showAnim: '',
+				firstDay: 0,
+				buttonTrigger: '#input1Trigger'
+			});
+
+			$('#inputG').calendarsPicker({
+				dateFormat: 'dd/mm/yyyy',
+				showAnim: '',
+				firstDay: 0,
+				showTrigger: '#InputGBtn'
+			});
+
+			$()
+
+			$('#inputG2').calendarsPicker({
+				dateFormat: 'dd/mm/yyyy',
+				showAnim: '',
+				firstDay: 0,
+				showTrigger: '<button class="btn bd bg-white tx-gray-600" id="InputGBtn" type="button"><i class="fa fa-calendar"></i></button>'
+			});
+		});
+	</script>
 </body>
 </html>
