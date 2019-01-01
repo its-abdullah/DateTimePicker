@@ -1,23 +1,48 @@
-var plugin = $.calendarsPicker; // Singleton instance
 //#region activating Picker
 $(document).ready(function(){
-    $('.dateTimePicker').calendarsPicker({
-        dateFormat: 'dd/mm/yyyy',
-        showAnim: '',
-        firstDay: 0,
-        showOnFocus: false,
-        buttonTrigger: '#upDate'
-    });
+    dateTimePicker('.dateTimePicker');
 });
 //#endregion Activating Picker
 
 //#region setting default options
 $.calendarsPicker.defaultOptions["yearRange"] = 'c-70:c+10';
+$.calendarsPicker.defaultOptions["dateFormat"] =  'dd/mm/yyyy';
+$.calendarsPicker.defaultOptions["showAnim"] =  '';
+$.calendarsPicker.defaultOptions["showOnFocus"] =  false;
 // $.calendarsPicker.regionalOptions["prevText"] could be set
 //#endregion setting default options
 
+
+var plugin = $.calendarsPicker; // Singleton instance
+var dateBtn = '<button class="btn btn-outline-secondary dateBtn" type="button"><i class="fa fa-calendar"></i></button>';
+var timeBtn = '<button class="btn btn-outline-secondary timeBtn" type="button"><i class="fa fa-clock-o"></i></button>';
+var btnWrapper = '<div class="input-group-append"/>';
+var inputGrp = '<div class="input-group dateTimePickerInputGrp"/>';
+
+function dateTimePicker(elem) {
+    $(elem).each(function(){
+        $(this).wrap(inputGrp);
+        $(this).after(timeBtn);
+        $(this).after(dateBtn);
+        $($(this).nextAll()).wrapAll(btnWrapper);
+    
+        $(this).calendarsPicker({
+            buttonTrigger: $(this).parent().children('.input-group-append').children('.dateBtn')
+        });
+    })
+}
+
 //#region adding buttonTrigger option
 $.calendarsPicker.regionalOptions[""].buttonTrigger = null;
+
+// $.calendarsPicker.getbuttonTrigger = function(elem, options) {
+//     if (options.buttonTrigger)
+//     {
+//         return $(elem).parent().children('.input-group-append').children('.dateBtn');
+//     }
+//     return false;
+// }
+
 $.calendarsPicker._instSettings = function(elem, options) { // jshint unused:false
     //buttonTrigger
     if (options.buttonTrigger) {
@@ -47,6 +72,7 @@ $.calendarsPicker._instSettings = function(elem, options) { // jshint unused:fal
         }
     };
 }
+
 $.calendarsPicker._checkExternalClick = function(event) {
     if (!plugin.curInst) {
         return;
@@ -66,7 +92,8 @@ $.calendarsPicker._checkExternalClick = function(event) {
         plugin.hide(plugin.curInst);
     }
 }
-/** Toggle a popup datepicker.
+
+/*Toggle a popup datepicker.
  * @memberof CalendarsPicker
  * @param {Event|Element} elem a focus event or the control to use.
  * @example $(selector).datepick('toggle') */
