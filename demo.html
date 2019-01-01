@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
 	<title>jQuery Calendars</title>
 	<!--#region css-->
-	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" media="all" rel="stylesheet" />
+	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" media="all" rel="stylesheet"
+	/>
 	<link href="css/jQuery-Calendars/jquery.calendars.picker.css" media="all" rel="stylesheet" />
 	<link href="css/jQuery-Calendars/ui.calendars.picker.css" media="all" rel="stylesheet" />
 	<!-- <link href="redmond.calendars.picker.css" media="all" rel="stylesheet" /> -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	 crossorigin="anonymous">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	 crossorigin="anonymous">
 	<link href="css/govDotSa.calendars.picker.css" media="all" rel="stylesheet" />
 	<link href="css/timePicker.css" media="all" rel="stylesheet" />
 	<!--#endregion css-->
@@ -19,23 +23,30 @@
 	 crossorigin="anonymous"></script>
 	<script src="js/popper.js/popper.js"></script>
 	<script src="js/bootstrap/bootstrap.js"></script>
+
 	<script src="js/jQuery-Calendars/jquery.plugin.js"></script>
+	<!-- <script src="js/jQuery-Calendars/jquery.calendars.all.js"></script> -->
 	<script src="js/jQuery-Calendars/jquery.calendars.js"></script>
-	<script src="js/jQuery-Calendars/jquery.calendars-ar.js"></script>
 	<script src="js/jQuery-Calendars/jquery.calendars.plus.js"></script>
+	<script src="js/jQuery-Calendars/jquery.calendars.picker.js"></script>
+	<script src="js/jQuery-Calendars/jquery.calendars-ar.js"></script>
 	<script src="js/jQuery-Calendars/jquery.calendars.ummalqura.js"></script>
 	<script src="js/jQuery-Calendars/jquery.calendars.ummalqura-ar.js"></script>
-	<script src="js/jQuery-Calendars/jquery.calendars.picker.js"></script>
 	<script src="js/timePicker.js"></script>
 	<script src="js/convertDate.js"></script>
+	<script src="js/dateTimePicker.js"></script>
 	<style>
-		.bs-popover-bottom .arrow ,.bs-popover-top .arrow  {
+		.bs-popover-bottom .arrow,
+		.bs-popover-top .arrow {
 			display: none;
 		}
-		.bs-popover-auto[x-placement^=bottom], .bs-popover-bottom {
-             margin-top:0px; }
+
+		.bs-popover-auto[x-placement^=bottom],
+		.bs-popover-bottom {
+			margin-top: 0px;
+		}
 	</style>
-	
+
 	<!-- <script src="jquery.calendars.picker-ar.js"></script> -->
 	<!--#endregion js-->
 	<style>
@@ -43,92 +54,51 @@
 		.input-group .dataTables_filter input:not(:first-child),
 		.dataTables_filter .input-group input:not(:first-child),
 		.input-group-addon:not(:first-child),
-		.input-group-btn:not(:first-child) > .btn,
-		.sp-container .input-group-btn:not(:first-child) > button,
-		.input-group-btn:not(:first-child) > .btn-group > .btn,
-		.sp-container .input-group-btn:not(:first-child) > .btn-group > button,
-		.input-group-btn:not(:first-child) > .dropdown-toggle,
-		.input-group-btn:not(:last-child) > .btn:not(:first-child),
-		.sp-container .input-group-btn:not(:last-child) > button:not(:first-child),
-		.input-group-btn:not(:last-child) > .btn-group:not(:first-child) > .btn,
-		.sp-container .input-group-btn:not(:last-child) > .btn-group:not(:first-child) > button {
-	    border-top-left-radius: 0;
-	    border-bottom-left-radius: 0;
-	}
+		.input-group-btn:not(:first-child)>.btn,
+		.sp-container .input-group-btn:not(:first-child)>button,
+		.input-group-btn:not(:first-child)>.btn-group>.btn,
+		.sp-container .input-group-btn:not(:first-child)>.btn-group>button,
+		.input-group-btn:not(:first-child)>.dropdown-toggle,
+		.input-group-btn:not(:last-child)>.btn:not(:first-child),
+		.sp-container .input-group-btn:not(:last-child)>button:not(:first-child),
+		.input-group-btn:not(:last-child)>.btn-group:not(:first-child)>.btn,
+		.sp-container .input-group-btn:not(:last-child)>.btn-group:not(:first-child)>button {
+			border-top-left-radius: 0;
+			border-bottom-left-radius: 0;
+		}
 	</style>
-	<style>
-	<script>
-		$(document).ready(function () {
-			$('#input1').calendarsPicker({
-				dateFormat: 'dd/mm/yyyy',
-				showAnim: '',
-				firstDay: 0,
-				buttonTrigger: '#input1Trigger'
-			});
-
-			$('#inputG').calendarsPicker({
-				dateFormat: 'dd/mm/yyyy',
-				showAnim: '',
-				firstDay: 0,
-				showTrigger: '#InputGBtn'
-			});
-
-			$('#inputG2').calendarsPicker({
-				dateFormat: 'dd/mm/yyyy',
-				showAnim: '',
-				firstDay: 0,
-				showTrigger: '<button class="btn bd bg-white tx-gray-600" id="InputGBtn" type="button"><i class="fa fa-calendar"></i></button>'
-			});
-
-			//timePicker
-			
-			$('#inputG2').popover({
-				content: timePickerHTML ,
-				html: true,
-				placement: 'bottom',
-				toggle: 'popover',
-				trigger: 'manual'
-			});
-
-			$('html').on('click', function (e) {
-				$('[data-toggle=popover]').each(function () {
-					if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
-						// 	 $(this).popover('hide');
-						$('#inputG2').popover('hide')
-					}
-				});
-			});
-
-			$("[data-toggle=popover]").click(function () {
-				$('#inputG2').popover('toggle');	
-			});
-			
-			// $('#trigger').click(function(){
-			// 	$('#inputG2').popover('toggle');	
-			// });
-
-		});
-		
-	</script>
 </head>
+
 <body>
 	<h1>jQuery Calendars</h1>
+	<div class="col-md-12 mb-3">
+		<div class="input-group">
+			<input type="text" class="form-control dateTimePicker">
+			<div class="input-group-append">
+				<button class="btn btn-outline-secondary" id="upDate" type="button"><i class="fa fa-calendar"></i></button>
+				<button class="btn btn-outline-secondary" type="button"><i class="fa fa-clock-o"></i></button>
+			</div>
+		</div>
+	</div>
 	<div class="col-lg-4 mg-t-20 mg-lg-t-0">
 		<div class="input-group">
-		  <input id="input1" type="text" class="form-control">
-		  <span class="input-group-btn">
-			<button class="btn bd bg-white tx-gray-600" id="input1Trigger" type="button"><i class="fa fa-calendar"></i></button>
-		  </span>
-		</div><!-- input-group -->
-	  </div>
+			<input id="input1" type="text" class="form-control">
+			<span class="input-group-btn">
+				<button class="btn bd bg-white tx-gray-600" id="input1Trigger" type="button">
+					<i class="fa fa-calendar"></i>
+				</button>
+			</span>
+		</div>
+	</div>
 	<p>Enter a gregorian date:
 		<div class="input-group col-md-4">
 			<input id="inputG" type="text" class="form-control" placeholder="Search for...">
 			<div class="input-group-btn">
-			  <button class="btn bd bg-white tx-gray-600" id="InputGBtn" type="button"><i class="fa fa-calendar"></i></button>
+				<button class="btn bd bg-white tx-gray-600" id="InputGBtn" type="button">
+					<i class="fa fa-calendar"></i>
+				</button>
 			</div>
-		  </div>
-		
+		</div>
 	</p>
 	<h4>this is just a test</h4>
 	<h4>this is just a test</h4>
@@ -137,35 +107,36 @@
 	<h1>jQuery Calendars</h1>
 	<p>Enter a gregorian date:
 		<input type="text" id="inputG2">
-
-		<input type="text" id="inputG2" >
-		<button  class="btn bd bg-white tx-gray-600" id="trigger" value="timepicker" data-toggle="popover" type="button"><i class="fa fa-clock-o"></i></button>
+		<input type="text" id="inputG2">
+		<button class="btn bd bg-white tx-gray-600" id="trigger" value="timepicker" data-toggle="popover" type="button">
+			<i class="fa fa-clock-o"></i>
+		</button>
 	</p>
-	<script>
-		$(document).ready(function () {
-			$('#input1').calendarsPicker({
-				dateFormat: 'dd/mm/yyyy',
-				showAnim: '',
-				firstDay: 0,
-				buttonTrigger: '#input1Trigger'
-			});
+	<script>$(document).ready(function () {
+			// $('#ultimatePicker').calendarsPicker({
+			// 	dateFormat: 'dd/mm/yyyy',
+			// 	showAnim: '',
+			// 	firstDay: 0,
+			// 	buttonTrigger: '#upDate'
+			// });
 
-			$('#inputG').calendarsPicker({
-				dateFormat: 'dd/mm/yyyy',
-				showAnim: '',
-				firstDay: 0,
-				showTrigger: '#InputGBtn'
-			});
+			// $('#inputG').calendarsPicker({
+			// 	dateFormat: 'dd/mm/yyyy',
+			// 	showAnim: '',
+			// 	firstDay: 0,
+			// 	showTrigger: '#InputGBtn'
+			// });
 
-			$()
+			// $('#inputG2').calendarsPicker({
+			// 	dateFormat: 'dd/mm/yyyy',
+			// 	showAnim: '',
+			// 	firstDay: 0,
+			// 	showTrigger: '<button class="btn bd bg-white tx-gray-600" id="InputGBtn" type="button"><i class="fa fa-calendar"></i></button>'
+			// });
+		}
 
-			$('#inputG2').calendarsPicker({
-				dateFormat: 'dd/mm/yyyy',
-				showAnim: '',
-				firstDay: 0,
-				showTrigger: '<button class="btn bd bg-white tx-gray-600" id="InputGBtn" type="button"><i class="fa fa-calendar"></i></button>'
-			});
-		});
+		);
 	</script>
 </body>
+
 </html>

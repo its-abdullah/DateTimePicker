@@ -1,8 +1,12 @@
 ﻿/* http://keith-wood.name/calendars.html
    Calendars date picker for jQuery v2.1.0.
    Written by Keith Wood (wood.keith{at}optusnet.com.au) August 2009.
-   Available under the MIT (http://keith-wood.name/licence.html) license. 
+   Available under the MIT (http://keith-wood.name/licence.html) license.
    Please attribute the author if you use it. */
+/* This file is modified and has not been shared over the internet yet
+   The changes were made by Abdullah Alhussain
+   added timePicker option, don't forget to include TimePicker.js
+   added toggle function */
 
 (function($) { // Hide scope, no $ conflict
 	'use strict';
@@ -397,6 +401,8 @@ $(selector).calendarsPicker({minDate: 0, maxDate: '+1m +1w'}) */
 			@property {boolean} [showOnFocus=true] <code>true</code> for popup on focus, <code>false</code> for not.
 			@property {string|Element|jQuery} [showTrigger=null] Element to be cloned for a trigger,
 				<code>null</code> for none.
+			@property {string} [buttonTrigger=null] Element to trigger calendar picker,
+				<code>null</code> for none.
 			@property {string} [showAnim='show'] Name of jQuery animation for popup, '' for no animation.
 			@property {object} [showOptions=null] Options for enhanced animations.
 			@property {string|number} [showSpeed='normal'] Duration of display/closure, named or in milliseconds.
@@ -422,7 +428,7 @@ $(selector).calendarsPicker({minDate: 0, maxDate: '+1m +1w'}) */
 				<code>false</code> to never use it.
 			@property {boolean} [changeMonth=true] <code>true</code> to change month/year via drop-down,
 				<code>false</code> for navigation only.
-			@property {string} [yearRange='c-10:c+10'] Range of years to show in drop-down: 'any' for direct text entry
+			@property {string} [yearRange='c-70:c+10'] Range of years to show in drop-down: 'any' for direct text entry
 				or 'start:end', where start/end are '+-nn' for relative to today
 				or 'c+-nn' for relative to the currently selected date
 				or 'nnnn' for an absolute year.
@@ -463,6 +469,7 @@ $(selector).calendarsPicker({minDate: $.calendars.newDate(2001, 1, 1),
 			pickerClass: '',
 			showOnFocus: true,
 			showTrigger: null,
+			buttonTrigger: null,
 			showAnim: 'show',
 			showOptions: {},
 			showSpeed: 'normal',
@@ -537,7 +544,8 @@ $(selector).calendarsPicker({minDate: $.calendars.newDate(2001, 1, 1),
 						column header.
 			@property {string} [dayStatus='Select DD, M d, yyyy'] Status text for selectable days.
 			@property {string} [defaultStatus='Select a date'] Status text shown by default.
-			@property {boolean} [isRTL=false] <code>true</code> if language is right-to-left. */
+			@property {boolean} [isRTL=false] <code>true</code> if language is right-to-left.
+			@property {boolean} [timePicker=false] <code>true</code> to include timePicker, don't forget to include timePicker.js. */
 		regionalOptions: { // Available regional settings, indexed by language/country code
 			'': { // Default regional settings - English/US
 				renderer: {}, // this.defaultRenderer
@@ -565,7 +573,8 @@ $(selector).calendarsPicker({minDate: $.calendars.newDate(2001, 1, 1),
 				weekStatus: 'Week of the year',
 				dayStatus: 'Select DD, M d, yyyy',
 				defaultStatus: 'Select a date',
-				isRTL: false
+				isRTL: false,
+				timePicker: false
 			}
 		},
 
@@ -586,6 +595,12 @@ $(selector).calendarsPicker({minDate: $.calendars.newDate(2001, 1, 1),
 		},
 
 		_instSettings: function(elem, options) { // jshint unused:false
+			//buttonTrigger
+			if (options.buttonTrigger) {
+				$(options.buttonTrigger).click(function(){
+					plugin.toggle(elem);
+				});
+			}
 			return {selectedDates: [], drawDate: null, pickingRange: false,
 				inline: ($.inArray(elem[0].nodeName.toLowerCase(), ['div', 'span']) > -1),
 				get: function(name) { // Get a setting value, computing if necessary
@@ -865,6 +880,25 @@ $(selector).calendarsPicker({minDate: $.calendars.newDate(2001, 1, 1),
 			}
 		},
 
+		/** Toggle a popup datepicker.
+			@memberof CalendarsPicker
+			@param {Event|Element} elem a focus event or the control to use.
+			@example $(selector).datepick('toggle') */
+			toggle: function(elem) {
+				if (!elem) {
+					return;
+				}
+				var inst = this._getInst(elem);
+				if (inst.div == null)
+				{
+					plugin.show(elem);
+				}
+				else
+				{
+					plugin.hide(elem);
+				}
+			},
+
 		/** Extract possible dates from a string.
 			@memberof CalendarsPicker
 			@private
@@ -968,9 +1002,15 @@ $(selector).calendarsPicker({minDate: $.calendars.newDate(2001, 1, 1),
 						calendar.formatDate(altFormat, inst.selectedDates[i], settings);
 				}
 				if (!inst.inline && !keyUp) {
-					$(elem).val(value);
+					if (inst.options.timePicker) {
+						$(elem).val(value + ' ' + generateTime());
+					}
+					else {
+						$(elem).val(value);
+					}
 				}
 				$(inst.options.altField).val(altValue);
+
 				if ($.isFunction(inst.options.onSelect) && !keyUp && !inst.inSelect) {
 					inst.inSelect = true; // Prevent endless loops
 					inst.options.onSelect.apply(elem, [inst.selectedDates]);
@@ -1055,8 +1095,17 @@ $(selector).calendarsPicker({minDate: $.calendars.newDate(2001, 1, 1),
 				return;
 			}
 			var elem = $(event.target);
+
 			if (elem.closest('.' + plugin._popupClass + ',.' + plugin._triggerClass).length === 0 &&
-					!elem.hasClass(plugin._getMarker())) {
+				!elem.hasClass(plugin._getMarker())
+				&&
+				(
+					plugin.curInst.options.buttonTrigger == null ||
+					($(event.target)[0] != $(plugin.curInst.options.buttonTrigger)[0] &&
+					$($(event.target).parent())[0] != $(plugin.curInst.options.buttonTrigger)[0])
+				)
+			)
+			{
 				plugin.hide(plugin.curInst);
 			}
 		},
@@ -1440,7 +1489,7 @@ $(selector).datepick('setDate', [date1, date2, date3]) */
 				var calendar = inst.options.calendar;
 				var show = this._checkMinMax(typeof year !== 'undefined' && year !== null ?
 					calendar.newDate(year, month, 1) : calendar.today(), inst);
-				inst.drawDate.date(show.year(), show.month(), 
+				inst.drawDate.date(show.year(), show.month(),
 					typeof day !== 'undefined' && day !== null ? day : Math.min(inst.drawDate.day(),
 					calendar.daysInMonth(show.year(), show.month())));
 				this._update(elem);
@@ -1570,6 +1619,10 @@ $(selector).datepick('setDate', [date1, date2, date3]) */
 			}
 			var picker = this._prepare(inst.options.renderer.picker, inst).replace(/\{months\}/, monthRows).
 				replace(/\{weekHeader\}/g, this._generateDayHeaders(inst, inst.options.calendar, inst.options.renderer));
+			// Add timePicker
+			if (inst.options.timePicker) {
+				picker = picker.replace('<div class="calendars-ctrl">', timePickerHTML + '<div class="calendars-ctrl">');
+			}
 			// Add commands
 			var addCommand = function(type, open, close, name, classes) {
 				if (picker.indexOf('{' + type + ':' + name + '}') === -1) {
@@ -1675,6 +1728,10 @@ $(selector).datepick('setDate', [date1, date2, date3]) */
 				width += $(this).outerWidth();
 			});
 			picker.width(width / monthsToShow[0]);
+			// Apeend timePicker actions
+			if (inst.options.timePicker) {
+				AppendButtonActions(elem, inst);
+			}
 			// Pre-show customisation
 			if ($.isFunction(inst.options.onShow)) {
 				inst.options.onShow.apply(elem, [picker, inst.options.calendar, inst]);
