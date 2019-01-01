@@ -6,8 +6,7 @@ $(document).ready(function(){
         showAnim: '',
         firstDay: 0,
         showOnFocus: false,
-        buttonTrigger: '#upDate',
-        timePicker: true
+        buttonTrigger: '#upDate'
     });
 });
 //#endregion Activating Picker
