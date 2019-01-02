@@ -15,7 +15,7 @@ $.calendarsPicker.defaultOptions["showOnFocus"] =  false;
 
 var plugin = $.calendarsPicker; // Singleton instance
 var dateBtn = '<button class="btn btn-outline-secondary dateBtn" type="button"><i class="fa fa-calendar"></i></button>';
-var timeBtn = '<button class="btn btn-outline-secondary timeBtn" type="button"><i class="fa fa-clock-o"></i></button>';
+var timeBtn = '<button class="btn btn-outline-secondary timeBtn" id="trigger" value="timepicker" data-toggle="popover" type="button"><i class="fa fa-clock-o"></i></button>';
 var btnWrapper = '<div class="input-group-append"/>';
 var inputGrp = '<div class="input-group dateTimePickerInputGrp"/>';
 
@@ -27,7 +27,9 @@ function dateTimePicker(elem) {
         $($(this).nextAll()).wrapAll(btnWrapper);
     
         $(this).calendarsPicker({
-            buttonTrigger: $(this).parent().children('.input-group-append').children('.dateBtn')
+            buttonTrigger: $(this).parent().children('.input-group-append').children('.dateBtn'),
+            timePicker: true
+            
         });
     })
 }

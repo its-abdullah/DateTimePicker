@@ -103,49 +103,49 @@ function AppendButtonActions(element, inst) {
     });
 }
 
-var timePickerHTML = '<div class="timepicker">' + //dropdown-menu
-    '<input class="selectedDate d-none"/>' +
-    '<table>' +
-    '<tbody>' +
-    '<tr>' +
-    '<td>' +
-    '<button title="Increment Hour" class="timepickerclickable change increment-hour">' +
-    '<span class="fa fa-arrow-up">' +
-    '</span>' +
-    '</button>' +
-    '</td>' +
-    '<td class="separator">' +
-    '</td>' +
-    '<td>' +
-    //'<a href="#" tabindex="-1" title="Increment Minute" class="timepickerclickable change increment-minute" data-action="incrementMinutes">' +
-    '<button title="Increment Minute" class="timepickerclickable change increment-minute">' +
-    '<span class="fa fa-arrow-up"></span>' +
-    '</button>' +
-    '</td>' +
-    '<td class="separator"></td>' +
-    '</tr>' +
-    '<tr>' +
-    '<td>' +
-    '<span class="timepicker-hour" data-time-component="hours" title="Pick Hour" data-action="showHours">02</span>' +
-    '</td>' +
-    '<td class="separator">:</td>' +
-    '<td><span class="timepicker-minute" data-time-component="minutes" title="Pick Minute" data-action="showMinutes">53</span></td>' +
-    '<td><button class="timepickerclickable timepicker-period" data-action="togglePeriod" tabindex="-1" title="Toggle Period">PM</button></td>' +
-    '</tr>' +
-    '<tr>' +
-    '<td>' +
-    '<button title="Decrement Hour" class="timepickerclickable change decrement-hour">' +
-    '<span class="fa fa-arrow-down"></span>' +
-    '</button>' +
-    '</td>' +
-    '<td class="separator"></td>' +
-    '<td>' +
-    '<button title="Decrement Minute" class="timepickerclickable change decrement-minute">' +
-    '<span class="fa fa-arrow-down"></span>' +
-    '</button>' +
-    '</td>' +
-    '<td class="separator"></td>' +
-    '</tr>' +
-    '</tbody>' +
-    '</table>' +
-    '</div>';
+var timePickerHTML = "<div class='timepicker'>" + //dropdown-menu
+    "<input class='selectedDate d-none'/>" +
+    "<table>" +
+    "<tbody>" +
+    "<tr>" +
+    "<td>" +
+    "<button title='Increment Hour' class='timepickerclickable change increment-hour'>" +
+    "<span class='fa fa-arrow-up'>" +
+    "</span>" +
+    "</button>" +
+    "</td>" +
+    "<td class='separator'>" +
+    "</td>" +
+    "<td>" +
+    //"<a href='#' tabindex='-1' title='Increment Minute' class='timepickerclickable change increment-minute' data-action='incrementMinutes'>" +
+    "<button title='Increment Minute' class='timepickerclickable change increment-minute'>" +
+    "<span class='fa fa-arrow-up'></span>" +
+    "</button>" +
+    "</td>" +
+    "<td class='separator'></td>" +
+    "</tr>" +
+    "<tr>" +
+    "<td>" +
+    "<span class='timepicker-hour' data-time-component='hours' title='Pick Hour' data-action='showHours'>02</span>" +
+    "</td>" +
+    "<td class='separator'>:</td>" +
+    "<td><span class='timepicker-minute' data-time-component='minutes' title='Pick Minute' data-action='showMinutes'>53</span></td>" +
+    "<td><button class='timepickerclickable timepicker-period' data-action='togglePeriod' tabindex='-1' title='Toggle Period'>PM</button></td>" +
+    "</tr>" +
+    "<tr>" +
+    "<td>" +
+    "<button title='Decrement Hour' class='timepickerclickable change decrement-hour'>" +
+    "<span class='fa fa-arrow-down'></span>" +
+    "</button>" +
+    "</td>" +
+    "<td class='separator'></td>" +
+    "<td>" +
+    "<button title='Decrement Minute' class='timepickerclickable change decrement-minute'>" +
+    "<span class='fa fa-arrow-down'></span>" +
+    "</button>" +
+    "</td>" +
+    "<td class='separator'></td>" +
+    "</tr>" +
+    "</tbody>" +
+    "</table>" +
+    "</div>";

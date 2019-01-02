@@ -46,102 +46,44 @@
 			margin-top: 0px;
 		}
 	</style>
-
 	<!-- <script src="jquery.calendars.picker-ar.js"></script> -->
 	<!--#endregion js-->
-	<style>
-		.input-group .form-control:not(:first-child),
-		.input-group .dataTables_filter input:not(:first-child),
-		.dataTables_filter .input-group input:not(:first-child),
-		.input-group-addon:not(:first-child),
-		.input-group-btn:not(:first-child)>.btn,
-		.sp-container .input-group-btn:not(:first-child)>button,
-		.input-group-btn:not(:first-child)>.btn-group>.btn,
-		.sp-container .input-group-btn:not(:first-child)>.btn-group>button,
-		.input-group-btn:not(:first-child)>.dropdown-toggle,
-		.input-group-btn:not(:last-child)>.btn:not(:first-child),
-		.sp-container .input-group-btn:not(:last-child)>button:not(:first-child),
-		.input-group-btn:not(:last-child)>.btn-group:not(:first-child)>.btn,
-		.sp-container .input-group-btn:not(:last-child)>.btn-group:not(:first-child)>button {
-			border-top-left-radius: 0;
-			border-bottom-left-radius: 0;
-		}
-	</style>
 </head>
 
 <body>
 	<h1>jQuery Calendars</h1>
-	<!-- <div class="col-md-12 mb-3">
-		<div class="input-group">
-			<input type="text" class="form-control dateTimePicker">
-			<div class="input-group-append">
-				<button class="btn btn-outline-secondary" id="upDate" type="button"><i class="fa fa-calendar"></i></button>
-				<button class="btn btn-outline-secondary" type="button"><i class="fa fa-clock-o"></i></button>
-			</div>
-		</div>
-	</div> -->
-	<div class="col-md-12 mb-3">
-		<input type="text" class="form-control dateTimePicker">
+	<div class="col-md-6 mb-3">
+		<input type="text" id="inputG2" class="form-control dateTimePicker">
 	</div>
-	<div class="col-md-12 mb-3">
-		<input type="text" class="form-control dateTimePicker">
-	</div>
-	<div class="col-lg-4 mg-t-20 mg-lg-t-0">
-		<div class="input-group">
-			<input id="input1" type="text" class="form-control">
-			<span class="input-group-btn">
-				<button class="btn bd bg-white tx-gray-600" id="input1Trigger" type="button">
-					<i class="fa fa-calendar"></i>
-				</button>
-			</span>
-		</div>
-	</div>
-	<p>Enter a gregorian date:
-		<div class="input-group col-md-4">
-			<input id="inputG" type="text" class="form-control" placeholder="Search for...">
-			<div class="input-group-btn">
-				<button class="btn bd bg-white tx-gray-600" id="InputGBtn" type="button">
-					<i class="fa fa-calendar"></i>
-				</button>
-			</div>
-		</div>
-	</p>
-	<h4>this is just a test</h4>
-	<h4>this is just a test</h4>
-	<h4>this is just a test</h4>
-	<h4>this is just a test</h4>
-	<h1>jQuery Calendars</h1>
-	<p>Enter a gregorian date:
-		<input type="text" id="inputG2">
-		<input type="text" id="inputG2">
-		<button class="btn bd bg-white tx-gray-600" id="trigger" value="timepicker" data-toggle="popover" type="button">
-			<i class="fa fa-clock-o"></i>
-		</button>
-	</p>
+	
 	<script>$(document).ready(function () {
-			// $('#ultimatePicker').calendarsPicker({
-			// 	dateFormat: 'dd/mm/yyyy',
-			// 	showAnim: '',
-			// 	firstDay: 0,
-			// 	buttonTrigger: '#upDate'
-			// });
+			$('#inputG2').popover({
+				content: timePickerHTML,
+				placement: 'auto',
+				toggle: 'popover',
+				trigger: 'manual',
+				html: true,
+				closeOnDocClick: true
+			});
 
-			// $('#inputG').calendarsPicker({
-			// 	dateFormat: 'dd/mm/yyyy',
-			// 	showAnim: '',
-			// 	firstDay: 0,
-			// 	showTrigger: '#InputGBtn'
-			// });
+			// to close popper when clicked somewhere else
+			$('html').on('click', function (e) {
+				$('[data-toggle=popover]').each(function () {
+					if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+						//      $(this).popover('hide');
+						$('#inputG2').popover('hide')
+					}
+				});
+			});
 
-			// $('#inputG2').calendarsPicker({
-			// 	dateFormat: 'dd/mm/yyyy',
-			// 	showAnim: '',
-			// 	firstDay: 0,
-			// 	showTrigger: '<button class="btn bd bg-white tx-gray-600" id="InputGBtn" type="button"><i class="fa fa-calendar"></i></button>'
-			// });
+			$("[data-toggle=popover]").click(function () {
+				$('#inputG2').popover('toggle');
+			});
 		}
 
 		);
+
+		
 	</script>
 </body>
 
