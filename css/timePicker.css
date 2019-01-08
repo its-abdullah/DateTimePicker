@@ -130,16 +130,21 @@
 .timepickerclickable {
     cursor: pointer;
     padding: 5px !important;
+    border: none;
 }
 
     .timepickerclickable.timepicker-period {
-        width: 30px;
+        /* width: 30px; */
         padding: 4px 0 4px 0;
         background-color: #0E8A8A;
         color: #fff;
+        border: none;
+        -webkit-border-radius: 0.25em;
+        font-weight: bold;
+        margin: 0.25em;
     }
 
-        .timepickerclickable.timepicker-period:hover {
+    .timepickerclickable.timepicker-period:hover {
             background-color: #0a7777;
         }
 
@@ -147,11 +152,20 @@
         background: #fff;
     }
 
-        .timepickerclickable.change:hover {
+    .timepickerclickable.change:hover {
             background: #e9ecef;
         }
-
-
+/* Popover style */
+    .popover-body {
+        border: 1px solid #0E8A8A;
+    }
+    .popover .arrow{
+        display: none;
+     }
+     .bs-popover-auto[x-placement^=bottom],
+	 .bs-popover-bottom {
+		margin-top: 0px;
+	}
 
 /*! CSS Used fontfaces */
 @font-face {
