@@ -45,29 +45,30 @@
 		<input type="text" id="inputG2" class="form-control dateTimePicker">
 	</div>
 	
-	<script>$(document).ready(function () {
-			$('#inputG2').popover({
-				content: timePickerHTML,
-				placement: 'auto',
-				toggle: 'popover',
-				trigger: 'manual',
-				html: true,
-				closeOnDocClick: true
-			});
+	<script>
+	$(document).ready(function () {
+			// $('#inputG2').popover({
+			// 	content: timePickerHTML,
+			// 	placement: 'auto',
+			// 	toggle: 'popover',
+			// 	trigger: 'manual',
+			// 	html: true,
+			// 	closeOnDocClick: true
+			// });
 
-			// to close popper when clicked somewhere else
-			$('html').on('click', function (e) {
-				$('[data-toggle=popover]').each(function () {
-					if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
-						//      $(this).popover('hide');
-						$('#inputG2').popover('hide')
-					}
-				});
-			});
+			// // to close popper when clicked somewhere else
+			// $('html').on('click', function (e) {
+			// 	$('[data-toggle=popover]').each(function () {
+			// 		if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+			// 			//      $(this).popover('hide');
+			// 			$('#inputG2').popover('hide')
+			// 		}
+			// 	});
+			// });
 
-			$("[data-toggle=popover]").click(function () {
-				$('#inputG2').popover('toggle');
-			});
+			// $("[data-toggle=popover]").click(function () {
+			// 	$('#inputG2').popover('toggle');
+			// });
 		}
 
 		);

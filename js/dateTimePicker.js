@@ -1,23 +1,8 @@
 //#region activating Picker
-$(document).ready(function(){
+$(document).ready(function() {
     dateTimePicker('.dateTimePicker');
 });
 //#endregion Activating Picker
-
-//#region setting default options
-$.calendarsPicker.defaultOptions["yearRange"] = 'c-70:c+10';
-$.calendarsPicker.defaultOptions["dateFormat"] =  'dd/mm/yyyy';
-$.calendarsPicker.defaultOptions["showAnim"] =  '';
-$.calendarsPicker.defaultOptions["showOnFocus"] =  false;
-// $.calendarsPicker.regionalOptions["prevText"] could be set
-//#endregion setting default options
-
-
-var plugin = $.calendarsPicker; // Singleton instance
-var dateBtn = '<button class="btn btn-outline-secondary dateBtn" type="button"><i class="fa fa-calendar"></i></button>';
-var timeBtn = '<button class="btn btn-outline-secondary timeBtn" id="trigger" value="timepicker" data-toggle="popover" type="button"><i class="fa fa-clock-o"></i></button>';
-var btnWrapper = '<div class="input-group-append"/>';
-var inputGrp = '<div class="input-group dateTimePickerInputGrp"/>';
 
 function dateTimePicker(elem) {
     $(elem).each(function(){
@@ -27,12 +12,49 @@ function dateTimePicker(elem) {
         $($(this).nextAll()).wrapAll(btnWrapper);
     
         $(this).calendarsPicker({
-            buttonTrigger: $(this).parent().children('.input-group-append').children('.dateBtn'),
-            timePicker: true
-            
+            buttonTrigger: $(this).parent().children('.input-group-append').children('.dateBtn')           
         });
-    })
+
+        $(this).popover({
+            content: timePickerHTML,
+            placement: 'auto',
+            toggle: 'popover',
+            trigger: 'manual',
+            html: true,
+            closeOnDocClick: true
+        });
+
+        // // to close popper when clicked somewhere else
+        // $('html').on('click', function (e) {
+        //     $('[data-toggle=popover]').each(function () {
+        //         if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+        //             //      $(this).popover('hide');
+        //             $(this).popover('hide')
+        //         }
+        //     });
+        // });
+
+        // $("[data-toggle=popover]").click(function () {
+        //     $(this).popover('toggle');
+        // });
+    });
 }
+
+//#region setting default options
+$.calendarsPicker.defaultOptions["yearRange"] = 'c-70:c+10';
+$.calendarsPicker.defaultOptions["dateFormat"] =  'dd/mm/yyyy';
+$.calendarsPicker.defaultOptions["showAnim"] =  '';
+$.calendarsPicker.defaultOptions["showOnFocus"] =  false;
+// $.calendarsPicker.regionalOptions["prevText"] could be set
+//#endregion setting default options
+
+// #region button group html
+var plugin = $.calendarsPicker; // Singleton instance
+var dateBtn = '<button class="btn btn-outline-secondary dateBtn" type="button"><i class="fa fa-calendar"></i></button>';
+var timeBtn = '<button class="btn btn-outline-secondary timeBtn" id="trigger" value="timepicker" data-toggle="popover" type="button"><i class="fa fa-clock-o"></i></button>';
+var btnWrapper = '<div class="input-group-append"/>';
+var inputGrp = '<div class="input-group dateTimePickerInputGrp"/>';
+// #endregion button group html
 
 //#region adding buttonTrigger option
 $.calendarsPicker.regionalOptions[""].buttonTrigger = null;
