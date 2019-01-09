@@ -156,15 +156,18 @@
             background: #e9ecef;
         }
 /* Popover style */
-    .popover-body {
+    .popover.dateTimePicker > .popover-body {
         border: 1px solid #0E8A8A;
     }
-    .popover .arrow{
-        display: none;
-     }
-     .bs-popover-auto[x-placement^=bottom],
-	 .bs-popover-bottom {
+
+    .popover.dateTimePicker.bs-popover-auto[x-placement^=bottom],
+    .popover.dateTimePicker.bs-popover-bottom {
 		margin-top: 0px;
+    }
+    
+    .popover.dateTimePicker.bs-popover-auto[x-placement^=top],
+    .popover.dateTimePicker.bs-popover-top {
+		margin-bottom: 0px;
 	}
 
 /*! CSS Used fontfaces */

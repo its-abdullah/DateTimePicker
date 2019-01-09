@@ -17,26 +17,40 @@ function dateTimePicker(elem) {
 
         $(this).popover({
             content: timePickerHTML,
-            placement: 'auto',
+            placement: 'bottom',
             toggle: 'popover',
             trigger: 'manual',
+            template: timePickerTemplate,
             html: true,
             closeOnDocClick: true
+        })
+        .on('show.bs.popover', function () {
+            $('.popover').remove();
+        })
+        .on('shown.bs.popover', function () {
+            AppendButtonActions(this);
+            console.log('shown');
+            var trans = $('.popover').css('transform');
+            var newTrans = trans.substring(trans.indexOf('(') + 1, trans.length -1)
+            .split(',');
+            newTrans[4] = $(this).offset().left;
+            $('.popover').css('transform', 'matrix(' + newTrans.join(', ') + ')');
         });
 
-        // // to close popper when clicked somewhere else
-        // $('html').on('click', function (e) {
-        //     $('[data-toggle=popover]').each(function () {
-        //         if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
-        //             //      $(this).popover('hide');
-        //             $(this).popover('hide')
-        //         }
-        //     });
-        // });
+        // to close popper when clicked somewhere else
+        $('html').on('click', function (e) {
+            console.log('clicked');
+            $('[data-toggle=popover]').each(function () {
+                console.log('loop');
+                if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+                    $(this).parent().prev().popover('hide');
+                }
+            });
+        });
 
-        // $("[data-toggle=popover]").click(function () {
-        //     $(this).popover('toggle');
-        // });
+        $(this).next().children('.timeBtn').click(function () {
+            $(this).parent().prev().popover('toggle');
+        });
     });
 }
 
@@ -54,6 +68,7 @@ var dateBtn = '<button class="btn btn-outline-secondary dateBtn" type="button"><
 var timeBtn = '<button class="btn btn-outline-secondary timeBtn" id="trigger" value="timepicker" data-toggle="popover" type="button"><i class="fa fa-clock-o"></i></button>';
 var btnWrapper = '<div class="input-group-append"/>';
 var inputGrp = '<div class="input-group dateTimePickerInputGrp"/>';
+var timePickerTemplate = '<div class="popover dateTimePicker" role="tooltip"><h3 class="popover-header"></h3><div class="popover-body"></div></div>';
 // #endregion button group html
 
 //#region adding buttonTrigger option
