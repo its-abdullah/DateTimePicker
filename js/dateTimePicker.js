@@ -29,7 +29,6 @@ function dateTimePicker(elem) {
         })
         .on('shown.bs.popover', function () {
             AppendButtonActions(this);
-            console.log('shown');
             var trans = $('.popover').css('transform');
             var newTrans = trans.substring(trans.indexOf('(') + 1, trans.length -1)
             .split(',');
@@ -39,9 +38,7 @@ function dateTimePicker(elem) {
 
         // to close popper when clicked somewhere else
         $('html').on('click', function (e) {
-            console.log('clicked');
             $('[data-toggle=popover]').each(function () {
-                console.log('loop');
                 if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
                     $(this).parent().prev().popover('hide');
                 }

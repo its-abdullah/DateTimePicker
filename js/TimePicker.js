@@ -11,15 +11,16 @@ function generateTime() {
     return time;
 }
 
-function onChange(element, inst) {
+function onChange(element) {
     selectedDate = $(element).val().split(' ')[0];
     if (selectedDate === "") {
-        selectedDate = inst.valueOf().options.calendar.today().formatDate(inst.valueOf().options.dateFormat);
+        var datePickerOptions = $('body > div:nth-child(2) > div > input').calendarsPicker('option');
+        selectedDate = datePickerOptions.calendar.today().formatDate(datePickerOptions.dateFormat);
     }
     $(element).val(selectedDate + ' ' + generateTime());
 }
 
-function incrementHour(element, inst) {
+function incrementHour(element) {
     currentHour = parseInt($('.timepicker-hour').text());
     if (currentHour == 12)
         currentHour = 1;
@@ -29,10 +30,10 @@ function incrementHour(element, inst) {
     if (currentHourString.length < 2)
         currentHourString = '0' + currentHourString;
     $('.timepicker-hour').text(currentHourString);
-    onChange(element, inst);
+    onChange(element);
 }
 
-function incrementMinute(element, inst) {
+function incrementMinute(element) {
     currentMinute = parseInt($('.timepicker-minute').text());
     if (currentMinute == 59)
         currentMinute = 00;
@@ -42,10 +43,10 @@ function incrementMinute(element, inst) {
     if (currentMinuteString.length < 2)
         currentMinuteString = '0' + currentMinuteString;
     $('.timepicker-minute').text(currentMinuteString);
-    onChange(element, inst);
+    onChange(element);
 }
 
-function decrementHour(element, inst) {
+function decrementHour(element) {
     currentHour = parseInt($('.timepicker-hour').text());
     if (currentHour == 1)
         currentHour = 12;
@@ -55,10 +56,10 @@ function decrementHour(element, inst) {
     if (currentHourString.length < 2)
         currentHourString = '0' + currentHourString;
     $('.timepicker-hour').text(currentHourString);
-    onChange(element, inst);
+    onChange(element);
 }
 
-function decrementMinute(element, inst) {
+function decrementMinute(element) {
     currentMinute = parseInt($('.timepicker-minute').text());
     if (currentMinute == 00)
         currentMinute = 59;
@@ -68,37 +69,37 @@ function decrementMinute(element, inst) {
     if (currentMinuteString.length < 2)
         currentMinuteString = '0' + currentMinuteString;
     $('.timepicker-minute').text(currentMinuteString);
-    onChange(element, inst);
+    onChange(element);
 }
 
-function timepickerPeriod(element, inst) {
+function timepickerPeriod(element) {
     if ($('.timepicker-period').text() == 'PM')
         $('.timepicker-period').text('AM');
     else if ($('.timepicker-period').text() == 'AM')
         $('.timepicker-period').text('PM');
-    onChange(element, inst);
+    onChange(element);
 }
 
-function AppendButtonActions(element, inst) {
+function AppendButtonActions(element) {
     $(document).ready(function () {
         $('.increment-hour').click(function () {
-            incrementHour(element, inst);
+            incrementHour(element);
         });
 
         $('.increment-minute').click(function () {
-            incrementMinute(element, inst);
+            incrementMinute(element);
         });
 
         $('.decrement-hour').click(function () {
-            decrementHour(element, inst);
+            decrementHour(element);
         });
 
         $('.decrement-minute').click(function () {
-            decrementMinute(element, inst);
+            decrementMinute(element);
         });
 
         $('.timepicker-period').click(function () {
-            timepickerPeriod(element, inst);
+            timepickerPeriod(element);
         });
     });
 }
