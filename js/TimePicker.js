@@ -1,23 +1,88 @@
 /* Time Picker extension for jQuery Calendars
    Written by Abdullah Alhussain */
 
-function generateTime() {
-    var time =
-        $('.timepicker-hour').text() +
-        ':' +
-        $('.timepicker-minute').text() +
-        ' ' +
-        $('.timepicker-period').text();
-    return time;
+/* Get time selected within the popover. */
+function getTimePickerSelectedTime() {
+    var timeObj = {};
+    timeObj.hour = $('.timepicker-hour').text();
+    timeObj.minute = $('.timepicker-minute').text();
+    timeObj.period = $('.timepicker-period').text();
+    return timeObj;
+}
+
+/* Get time selected from the input value.
+@param {element} the input selector. */
+function getInputTime(element) {
+    return disassembleTime($(element).val().split(' ')[1] +
+        " " +
+        $(element).val().split(' ')[2]);
+}
+
+/* Format time object to h:mm tt
+@param {time} time object. */
+function formatTime(time) {
+    return time.hour + ":" + time.minute + " " + time.period;
+}
+
+/* Disassemble time string into time object
+@param {time} time string. */
+function disassembleTime(time) {
+    var timeObj = {};
+    timeObj.hour = time.split(" ")[0].split(":")[0];
+    timeObj.minute = time.split(" ")[0].split(":")[1];
+    timeObj.period = time.split(" ")[1];
+    return timeObj;
+}
+
+/* Get now time as a time object */
+function getCurrentTime() {
+    var currentdate = new Date();
+    var currentHour = (((currentdate.getHours() + 11) % 12) + 1).toString();
+    if (currentHour.length == 1)
+        currentHour = "0" + currentHour;
+
+    var currentMinute = currentdate.getMinutes().toString();
+    if (currentMinute.length == 1)
+        currentMinute = "0" + currentMinute;
+
+    return {
+        hour: currentHour,
+        minute: currentMinute,
+        period: currentdate.getHours() >= 12 ? "PM" : "AM"
+    }
+}
+
+
+function getSelectedTime(element) {
+    if ($('.popover.dateTimePicker').length)
+    {
+        return getTimePickerSelectedTime();
+    }
+    else if(typeof $(element).val().split(' ')[1] !== "undefined")
+    {
+        return getInputTime(element);
+    }
+    else {
+        return getCurrentTime();
+    }
+}
+
+function getSelectedDate(element) {
+    var date = $(element).val().split(' ')[0];
+    if (date)
+    {
+        return date;
+    }
+    
+    else
+    {
+        var datePickerOptions = $(element).calendarsPicker('option');
+        return datePickerOptions.calendar.today().formatDate(datePickerOptions.dateFormat);
+    }
 }
 
 function onChange(element) {
-    selectedDate = $(element).val().split(' ')[0];
-    if (selectedDate === "") {
-        var datePickerOptions = $('body > div:nth-child(2) > div > input').calendarsPicker('option');
-        selectedDate = datePickerOptions.calendar.today().formatDate(datePickerOptions.dateFormat);
-    }
-    $(element).val(selectedDate + ' ' + generateTime());
+    $(element).val(getSelectedDate(element) + ' ' + formatTime(getSelectedTime(element)));
 }
 
 function incrementHour(element) {
@@ -104,7 +169,16 @@ function AppendButtonActions(element) {
     });
 }
 
-var timePickerHTML = "<div class='timepicker'>" + //dropdown-menu
+function getTimePickerHtml(element) {
+    var SelectedTime = getSelectedTime(element);
+    template = timePickerHTML
+    .replace("{{Hour}}", SelectedTime.hour)
+    .replace("{{Minute}}", SelectedTime.minute)
+    .replace("{{Period}}", SelectedTime.period);
+    return template;
+}
+
+var timePickerHTML = "<div class='timepicker'>" +
     "<input class='selectedDate d-none'/>" +
     "<table>" +
     "<tbody>" +
@@ -118,7 +192,6 @@ var timePickerHTML = "<div class='timepicker'>" + //dropdown-menu
     "<td class='separator'>" +
     "</td>" +
     "<td>" +
-    //"<a href='#' tabindex='-1' title='Increment Minute' class='timepickerclickable change increment-minute' data-action='incrementMinutes'>" +
     "<button title='Increment Minute' class='timepickerclickable change increment-minute'>" +
     "<span class='fa fa-arrow-up'></span>" +
     "</button>" +
@@ -127,11 +200,11 @@ var timePickerHTML = "<div class='timepicker'>" + //dropdown-menu
     "</tr>" +
     "<tr>" +
     "<td>" +
-    "<span class='timepicker-hour' data-time-component='hours' title='Pick Hour' data-action='showHours'>02</span>" +
+    "<span class='timepicker-hour' data-time-component='hours' title='Pick Hour' data-action='showHours'>{{Hour}}</span>" +
     "</td>" +
     "<td class='separator'>:</td>" +
-    "<td><span class='timepicker-minute' data-time-component='minutes' title='Pick Minute' data-action='showMinutes'>53</span></td>" +
-    "<td><button class='timepickerclickable timepicker-period' data-action='togglePeriod' tabindex='-1' title='Toggle Period'>PM</button></td>" +
+    "<td><span class='timepicker-minute' data-time-component='minutes' title='Pick Minute' data-action='showMinutes'>{{Minute}}</span></td>" +
+    "<td><button class='timepickerclickable timepicker-period' data-action='togglePeriod' tabindex='-1' title='Toggle Period'>{{Period}}</button></td>" +
     "</tr>" +
     "<tr>" +
     "<td>" +

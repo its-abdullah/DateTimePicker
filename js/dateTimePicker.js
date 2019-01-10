@@ -1,53 +1,72 @@
 //#region activating Picker
 $(document).ready(function() {
-    dateTimePicker('.dateTimePicker');
+    dateTimePicker('.dateTimePicker', {
+        hasDatePicker: true,
+        hasTimePicker: true
+    });
 });
 //#endregion Activating Picker
 
-function dateTimePicker(elem) {
+var defaultOptions = {
+    hasDatePicker: true, 
+    hasTimePicker: false,
+    language: 'en'
+};
+
+function dateTimePicker(elem, options) {
+    if (options == null)
+        options = defaultOptions;
+    
     $(elem).each(function(){
         $(this).wrap(inputGrp);
-        $(this).after(timeBtn);
-        $(this).after(dateBtn);
+        if (options.hasTimePicker)
+            $(this).after(timeBtn);
+
+        if (options.hasDatePicker)
+            $(this).after(dateBtn);
+
         $($(this).nextAll()).wrapAll(btnWrapper);
-    
-        $(this).calendarsPicker({
-            buttonTrigger: $(this).parent().children('.input-group-append').children('.dateBtn')           
-        });
 
-        $(this).popover({
-            content: timePickerHTML,
-            placement: 'bottom',
-            toggle: 'popover',
-            trigger: 'manual',
-            template: timePickerTemplate,
-            html: true,
-            closeOnDocClick: true
-        })
-        .on('show.bs.popover', function () {
-            $('.popover').remove();
-        })
-        .on('shown.bs.popover', function () {
-            AppendButtonActions(this);
-            var trans = $('.popover').css('transform');
-            var newTrans = trans.substring(trans.indexOf('(') + 1, trans.length -1)
-            .split(',');
-            newTrans[4] = $(this).offset().left;
-            $('.popover').css('transform', 'matrix(' + newTrans.join(', ') + ')');
-        });
-
-        // to close popper when clicked somewhere else
-        $('html').on('click', function (e) {
-            $('[data-toggle=popover]').each(function () {
-                if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
-                    $(this).parent().prev().popover('hide');
-                }
+        if (options.hasTimePicker)
+            $(this).calendarsPicker({
+                buttonTrigger: $(this).parent().children('.input-group-append').children('.dateBtn')
             });
-        });
 
-        $(this).next().children('.timeBtn').click(function () {
-            $(this).parent().prev().popover('toggle');
-        });
+        if (options.hasDatePicker) {
+            $(this).popover({
+                content: getTimePickerHtml(this),
+                placement: 'bottom',
+                toggle: 'popover',
+                trigger: 'manual',
+                template: timePickerTemplate,
+                html: true,
+                closeOnDocClick: true
+            })
+                .on('show.bs.popover', function () {
+                    $('.popover').remove();
+                })
+                .on('shown.bs.popover', function () {
+                    AppendButtonActions(this);
+                    var trans = $('.popover').css('transform');
+                    var newTrans = trans.substring(trans.indexOf('(') + 1, trans.length - 1)
+                        .split(',');
+                    newTrans[4] = $(this).offset().left;
+                    $('.popover').css('transform', 'matrix(' + newTrans.join(', ') + ')');
+                });
+
+            // to close popper when clicked somewhere else
+            $('html').on('click', function (e) {
+                $('[data-toggle=popover]').each(function () {
+                    if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+                        $(this).parent().prev().popover('hide');
+                    }
+                });
+            });
+
+            $(this).next().children('.timeBtn').click(function () {
+                $(this).parent().prev().popover('toggle');
+            });
+        }
     });
 }
 
@@ -160,12 +179,7 @@ $.calendarsPicker._updateInput = function(elem, keyUp) {
                 calendar.formatDate(altFormat, inst.selectedDates[i], settings);
         }
         if (!inst.inline && !keyUp) {
-            if (inst.options.timePicker) {
-                $(elem).val(value + ' ' + generateTime());
-            }
-            else {
-                $(elem).val(value);
-            }
+            $(elem).val(value + ' ' + formatTime(getSelectedTime(elem)));
         }
         $(inst.options.altField).val(altValue);
 
