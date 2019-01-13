@@ -62,6 +62,9 @@ function dateTimePicker(elem, options) {
                     }
                 });
             });
+            $( '.timeBtn' ).focus(function(){ 
+                $(this).parent().prev().focus();
+              });
 
             $(this).next().children('.timeBtn').click(function () {
                 $(this).parent().prev().popover('toggle');
