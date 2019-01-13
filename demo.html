@@ -1,41 +1,24 @@
 <!DOCTYPE html>
 <html>
-
 <head>
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-	<title>jQuery Calendars</title>
+	<title>date time picker DEMO</title>
 	<!--#region css-->
-	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" media="all" rel="stylesheet"
-	/>
-	<link href="css/jQuery-Calendars/jquery.calendars.picker.css" media="all" rel="stylesheet" />
-	<link href="css/jQuery-Calendars/ui.calendars.picker.css" media="all" rel="stylesheet" />
-	<!-- <link href="redmond.calendars.picker.css" media="all" rel="stylesheet" /> -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-	 crossorigin="anonymous">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-	 crossorigin="anonymous">
-	<link href="css/govDotSa.calendars.picker.css" media="all" rel="stylesheet" />
-	<link href="css/timePicker.css" media="all" rel="stylesheet" />
+	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" media="all" rel="stylesheet" />
+	<link href="lib/jQuery-Calendars/jquery.calendars.picker.css" rel="stylesheet" />
+	<link href="lib/bootstrap/bootstrap.min.css" rel="stylesheet"/>
+	<link href="src/govDotSa.calendars.picker.css" media="all" rel="stylesheet" />
+	<link href="src/timePicker.css" media="all" rel="stylesheet" />
 	<!--#endregion css-->
 	<!--#region js-->
-	<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-	 crossorigin="anonymous"></script>
-	<script src="js/popper.js/popper.js"></script>
-	<script src="js/bootstrap/bootstrap.js"></script>
-	<!-- test -->
-	<script src="js/jQuery-Calendars/jquery.plugin.js"></script>
-	<!-- <script src="js/jQuery-Calendars/jquery.calendars.all.js"></script> -->
-	<script src="js/jQuery-Calendars/jquery.calendars.js"></script>
-	<script src="js/jQuery-Calendars/jquery.calendars.plus.js"></script>
-	<script src="js/jQuery-Calendars/jquery.calendars.picker.js"></script>
-	<script src="js/jQuery-Calendars/jquery.calendars-ar.js"></script>
-	<script src="js/jQuery-Calendars/jquery.calendars.ummalqura.js"></script>
-	<script src="js/jQuery-Calendars/jquery.calendars.ummalqura-ar.js"></script>
-	<script src="js/timePicker.js"></script>
-	<script src="js/convertDate.js"></script>
-	<script src="js/dateTimePicker.js"></script>
-	<!-- <script src="jquery.calendars.picker-ar.js"></script> -->
+	<script src="lib/jQuery/jquery-3.3.1.min.js"></script>
+	<script src="lib/popper.js/popper.js"></script>
+	<script src="lib/bootstrap/bootstrap.min.js"></script>
+	<script src="lib/jquery.plugin/jquery.plugin.js"></script>
+	<script src="lib/jQuery-Calendars/jquery.calendars.all.js"></script>
+	<script src="src/timePicker.js"></script>
+	<script src="src/convertDate.js"></script>
+	<script src="src/dateTimePicker.js"></script>
 	<!--#endregion js-->
 </head>
 
@@ -47,35 +30,6 @@
 	<div class="col-md-6 mb-3" style="position: absolute; bottom: 0;">
 		<input type="text" class="form-control dateTimePicker">
 	</div>
-	<script>
-	$(document).ready(function () {
-			// $('#inputG2').popover({
-			// 	content: timePickerHTML,
-			// 	placement: 'auto',
-			// 	toggle: 'popover',
-			// 	trigger: 'manual',
-			// 	html: true,
-			// 	closeOnDocClick: true
-			// });
-
-			// // to close popper when clicked somewhere else
-			// $('html').on('click', function (e) {
-			// 	$('[data-toggle=popover]').each(function () {
-			// 		if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
-			// 			//      $(this).popover('hide');
-			// 			$('#inputG2').popover('hide')
-			// 		}
-			// 	});
-			// });
-
-			// $("[data-toggle=popover]").click(function () {
-			// 	$('#inputG2').popover('toggle');
-			// });
-		}
-
-		);
-			
-	</script>
 </body>
 
 </html>
