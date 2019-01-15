@@ -10,7 +10,14 @@ $(document).ready(function() {
 var defaultOptions = {
     hasDatePicker: true, 
     hasTimePicker: false,
-    language: 'en'
+    datePickerOptions: defaultDatePickerOptions
+};
+
+var defaultDatePickerOptions = {
+    yearRange: 'c-70:c+10',
+    dateFormat: 'dd/mm/yyyy',
+    showAnim: '',
+    showOnFocus: false,
 };
 
 function dateTimePicker(elem, options) {
@@ -18,6 +25,7 @@ function dateTimePicker(elem, options) {
         options = defaultOptions;
     
     $(elem).each(function(){
+        // #region appending buttons to the textbox
         $(this).wrap(inputGrp);
         if (options.hasTimePicker)
             $(this).after(timeBtn);
@@ -26,12 +34,21 @@ function dateTimePicker(elem, options) {
             $(this).after(dateBtn);
 
         $($(this).nextAll()).wrapAll(btnWrapper);
+        // #endregion appending buttons to the textbox
 
+        // #region configuring date picker
         if (options.hasTimePicker)
-            $(this).calendarsPicker({
-                buttonTrigger: $(this).parent().children('.input-group-append').children('.dateBtn')
-            });
+        {
+            if (typeof options.datePickerOptions == "undefined")
+                options.datePickerOptions = defaultDatePickerOptions;
 
+            options.datePickerOptions.buttonTrigger =
+                $(this).parent().children('.input-group-append').children('.dateBtn');
+            $(this).calendarsPicker(options.datePickerOptions);
+        }
+        // #endregion configuring date picker
+
+        // #region configuring time picker
         if (options.hasDatePicker) {
             $(this).popover({
                 content: getTimePickerHtml(this),
@@ -70,25 +87,18 @@ function dateTimePicker(elem, options) {
                 $(this).parent().prev().popover('toggle');
             });
         }
+        // #endregion configuring time picker
     });
 }
 
-//#region setting default options
-$.calendarsPicker.defaultOptions["yearRange"] = 'c-70:c+10';
-$.calendarsPicker.defaultOptions["dateFormat"] =  'dd/mm/yyyy';
-$.calendarsPicker.defaultOptions["showAnim"] =  '';
-$.calendarsPicker.defaultOptions["showOnFocus"] =  false;
-// $.calendarsPicker.regionalOptions["prevText"] could be set
-//#endregion setting default options
-
-// #region button group html
-var plugin = $.calendarsPicker; // Singleton instance
+// #region button group template
+var plugin = $.calendarsPicker;
 var dateBtn = '<button class="btn btn-outline-secondary dateBtn" type="button"><i class="fa fa-calendar"></i></button>';
 var timeBtn = '<button class="btn btn-outline-secondary timeBtn" id="trigger" value="timepicker" data-toggle="popover" type="button"><i class="fa fa-clock-o"></i></button>';
 var btnWrapper = '<div class="input-group-append"/>';
 var inputGrp = '<div class="input-group dateTimePickerInputGrp"/>';
 var timePickerTemplate = '<div class="popover dateTimePicker" role="tooltip"><h3 class="popover-header"></h3><div class="popover-body"></div></div>';
-// #endregion button group html
+// #endregion button group template
 
 //#region adding buttonTrigger option
 $.calendarsPicker.regionalOptions[""].buttonTrigger = null;
