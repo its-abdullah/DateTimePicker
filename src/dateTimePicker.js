@@ -1,3 +1,6 @@
+/* DateTimePicker
+   Written by Abdullah Alhussain and Reema Aldayel */
+
 //#region activating Picker
 $(document).ready(function() {
     dateTimePicker('.dateTimePicker', {

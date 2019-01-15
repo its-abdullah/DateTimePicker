@@ -1,4 +1,4 @@
-/* Time Picker extension for jQuery Calendars
+/* Time Picker extension
    Written by Abdullah Alhussain */
 
 /* Get time selected within the popover. */
