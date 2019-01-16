@@ -5,10 +5,10 @@ DateTimePicker is a js library ment to to provide a time picker along side keith
 
 #### why does this library exist?
 while we were working on a huge project we found out that we need a datepicker that supports both Hijri and Gregorian Calenders and also provide a time picker as well.
-We looked for a library that provides both all of this on the internet but we couldn't find one, so we thought we should make it!
+We looked for a library that provides all of that on the internet but we couldn't find one, so we thought we should make it ourselves!
 
 #### Why keith-wood date picker?
-  keith-wood date picker support a lot of different calenders and also provide good functions to be able to convert between these calenders.
+  keith-wood date picker support a lot of different calenders and also provide various functions such as converting between calenders.
   
  #### What we're planning to do next
 * Setting up a good options
@@ -28,7 +28,7 @@ We looked for a library that provides both all of this on the internet but we co
 
 #### Notes
 * We're a small busy team and fresh when it comes to building JS library so please bear with our humble experience.
-* We've created a Slack channel, your very welcome to come and chat with us.
+* We've created a Slack channel, you're very welcome to join us, let us know what we've missed, help us improve this library to make it useful for everyone!
 
 ## License
 welp, I think it's too early for this
