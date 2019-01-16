@@ -1,15 +1,6 @@
 /* DateTimePicker
    Written by Abdullah Alhussain and Reema Aldayel */
 
-//#region activating Picker
-$(document).ready(function() {
-    dateTimePicker('.dateTimePicker', {
-        hasDatePicker: true,
-        hasTimePicker: true
-    });
-});
-//#endregion Activating Picker
-
 var defaultOptions = {
     hasDatePicker: true, 
     hasTimePicker: false,

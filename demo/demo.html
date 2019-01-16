@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+	<title>date time picker DEMO</title>
+	<!--#region css-->
+	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" media="all" rel="stylesheet" />
+	<link href="../lib/jQuery-Calendars/jquery.calendars.picker.css" rel="stylesheet" />
+	<link href="../lib/bootstrap/bootstrap.min.css" rel="stylesheet"/>
+	<link href="../src/govDotSa.calendars.picker.css" media="all" rel="stylesheet" />
+	<link href="../src/timePicker.css" media="all" rel="stylesheet" />
+	<!--#endregion css-->
+	<!--#region js-->
+	<script src="../lib/jQuery/jquery-3.3.1.min.js"></script>
+	<script src="../lib/popper.js/popper.js"></script>
+	<script src="../lib/bootstrap/bootstrap.min.js"></script>
+	<script src="../lib/jquery.plugin/jquery.plugin.js"></script>
+	<script src="../lib/jQuery-Calendars/jquery.calendars.all.js"></script>
+	<script src="jquery.calendars.ummalqura.js"></script>
+	<script src="../src/timePicker.js"></script>
+	<script src="../src/convertDate.js"></script>
+	<script src="../src/dateTimePicker.js"></script>
+	<!--#endregion js-->
+</head>
+
+<body class="p-3">
+	<h1>jQuery Calendars</h1>
+	<div class="col-md-6 mb-3">
+		<label>Gregorian Calendar</label>
+		<input type="text" class="form-control dateTimePicker">
+	</div>
+	<div class="col-md-6 mb-3" style="position: absolute; bottom: 0;">
+		<label>Hijri Calendar</label>
+		<input type="text" class="form-control dateTimePicker Hijri">
+	</div>
+</body>
+<script>
+//#region activating Picker
+$(document).ready(function() {
+    dateTimePicker('.dateTimePicker', {
+        hasDatePicker: true,
+        hasTimePicker: true
+	});
+	
+	$('.dateTimePicker.Hijri').calendarsPicker('option', 'calender', $.calendars.instance('ummalqura'));
+});
+//#endregion Activating Picker
+</script>
+</html>
