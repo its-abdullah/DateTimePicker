@@ -1,5 +1,5 @@
 # DateTimePicker
-![Generic badge](https://img.shields.io/badge/status-beta-blue.svg) [![Slack](https://img.shields.io/badge/Slack-Join_us!-E01563.svg)](https://datetimepicker.slack.com/)
+![Generic badge](https://img.shields.io/badge/status-beta-blue.svg)
 
 DateTimePicker is a js library ment to to provide a time picker along side keith-wood date picker.
 
